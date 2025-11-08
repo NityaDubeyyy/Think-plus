@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Textarea } from './ui/textarea';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { ScrollReveal } from './ScrollReveal';
 
 export function ContactUs() {
@@ -52,11 +52,11 @@ export function ContactUs() {
                   <CardDescription>Reach out to us through any of these channels</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <motion.div 
+                  <motion.div
                     className="flex items-start gap-3"
                     whileHover={{ x: 5 }}
                   >
-                    <motion.div 
+                    <motion.div
                       className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                     >
@@ -71,11 +71,11 @@ export function ContactUs() {
                     </div>
                   </motion.div>
 
-                  <motion.div 
+                  <motion.div
                     className="flex items-start gap-3"
                     whileHover={{ x: 5 }}
                   >
-                    <motion.div 
+                    <motion.div
                       className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                     >
@@ -90,11 +90,11 @@ export function ContactUs() {
                     </div>
                   </motion.div>
 
-                  <motion.div 
+                  <motion.div
                     className="flex items-start gap-3"
                     whileHover={{ x: 5 }}
                   >
-                    <motion.div 
+                    <motion.div
                       className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                     >
@@ -109,11 +109,11 @@ export function ContactUs() {
                     </div>
                   </motion.div>
 
-                  <motion.div 
+                  <motion.div
                     className="flex items-start gap-3"
                     whileHover={{ x: 5 }}
                   >
-                    <motion.div 
+                    <motion.div
                       className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                     >

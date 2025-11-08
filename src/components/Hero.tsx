@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 import { ArrowRight, BookOpen, Target, Trophy } from 'lucide-react';
 import * as THREE from 'three';

@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
@@ -100,7 +100,7 @@ export function Courses({ onEnroll }: CoursesProps) {
                       <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-100">
                         {course.duration}
                       </Badge>
-                      <motion.div 
+                      <motion.div
                         className="flex items-center gap-1"
                         whileHover={{ scale: 1.1 }}
                       >
@@ -111,17 +111,17 @@ export function Courses({ onEnroll }: CoursesProps) {
                     <CardTitle>{course.title}</CardTitle>
                     <CardDescription>{course.description}</CardDescription>
                   </CardHeader>
-                  
+
                   <CardContent className="flex-1">
                     <div className="space-y-3 mb-4">
-                      <motion.div 
+                      <motion.div
                         className="flex items-center gap-2 text-sm text-gray-600"
                         whileHover={{ x: 5 }}
                       >
                         <Clock className="w-4 h-4" />
                         <span>{course.lectures} Lectures</span>
                       </motion.div>
-                      <motion.div 
+                      <motion.div
                         className="flex items-center gap-2 text-sm text-gray-600"
                         whileHover={{ x: 5 }}
                       >
@@ -132,8 +132,8 @@ export function Courses({ onEnroll }: CoursesProps) {
 
                     <div className="space-y-2">
                       {course.features.map((feature, idx) => (
-                        <motion.div 
-                          key={idx} 
+                        <motion.div
+                          key={idx}
                           className="flex items-center gap-2 text-sm text-gray-600"
                           whileHover={{ x: 5 }}
                         >
@@ -143,7 +143,7 @@ export function Courses({ onEnroll }: CoursesProps) {
                       ))}
                     </div>
                   </CardContent>
-                  
+
                   <CardFooter className="flex items-center justify-between border-t dark:border-gray-800 pt-4">
                     <div>
                       <span className="text-2xl text-gray-900 dark:text-white">₹{course.price.toLocaleString()}</span>
@@ -152,7 +152,7 @@ export function Courses({ onEnroll }: CoursesProps) {
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      <Button 
+                      <Button
                         className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 dark:from-blue-500 dark:to-blue-600 transition-all hover:shadow-lg hover:shadow-blue-500/50"
                         onClick={() => onEnroll(course)}
                       >

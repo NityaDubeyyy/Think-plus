@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Courses } from './components/Courses';
@@ -45,30 +44,6 @@ export default function App() {
     setShowPayment(true);
   };
 
-  // Page transition variants
-  const pageVariants = {
-    initial: {
-      opacity: 0,
-      y: 20,
-    },
-    animate: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: 'easeOut',
-      },
-    },
-    exit: {
-      opacity: 0,
-      y: -20,
-      transition: {
-        duration: 0.3,
-        ease: 'easeIn',
-      },
-    },
-  };
-
   return (
     <ThemeProvider>
       <div className="min-h-screen bg-white dark:bg-gray-950 transition-colors duration-300">
@@ -80,87 +55,59 @@ export default function App() {
           onLogout={handleLogout}
         />
         
-        <AnimatePresence mode="wait">
           {activeSection === 'home' && (
-            <motion.div
-              key="home"
-              variants={pageVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-            >
+            <div key="home">
               <Hero />
               <Features />
               <Courses onEnroll={handleEnrollCourse} />
               <ContactUs />
-            </motion.div>
+            </div>
           )}
 
           {activeSection === 'courses' && (
-            <motion.div
-              key="courses"
-              variants={pageVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
+            <div
+              key="home"
               className="pt-20"
             >
               <Courses onEnroll={handleEnrollCourse} />
-            </motion.div>
+            </div>
           )}
 
           {activeSection === 'study-materials' && isLoggedIn && (
-            <motion.div
+            <div
               key="study-materials"
-              variants={pageVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
               className="pt-20"
             >
               <StudyMaterials />
-            </motion.div>
+            </div>
           )}
 
           {activeSection === 'tests' && isLoggedIn && (
-            <motion.div
+            <div
               key="tests"
-              variants={pageVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
               className="pt-20"
             >
               <TestSection />
-            </motion.div>
+            </div>
           )}
 
           {activeSection === 'progress' && isLoggedIn && (
-            <motion.div
+            <div
               key="progress"
-              variants={pageVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
               className="pt-20"
             >
               <ProgressDashboard />
-            </motion.div>
+            </div>
           )}
 
           {activeSection === 'contact' && (
-            <motion.div
+            <div
               key="contact"
-              variants={pageVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
               className="pt-20"
             >
               <ContactUs />
-            </motion.div>
+            </div>
           )}
-        </AnimatePresence>
 
         <Footer />
         <Chatbot />
@@ -172,7 +119,7 @@ export default function App() {
             onClose={() => setShowPayment(false)}
             onSuccess={() => {
               setShowPayment(false);
-              handleLogin();
+              handleLogin({});
               setActiveSection('study-materials');
             }}
           />

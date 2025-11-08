@@ -1,12 +1,13 @@
-import { Menu, X, GraduationCap, LogOut, User, Settings as SettingsIcon, ChevronDown } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { Menu, X, GraduationCap, LogOut, User, Settings as SettingsIcon, ChevronDown, Sun, Moon } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './ui/button';
 import { useState } from 'react';
 import { Settings } from './Settings';
+import { useTheme } from '../lib/ThemeContext';
 import { ProfileModal } from './ProfileModal';
 import { LoginModal } from './LoginModal';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+import { Avatar, AvatarFallback } from './ui/avatar';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from './ui/alert-dialog';
 
 interface NavbarProps {
@@ -35,7 +36,13 @@ export function Navbar({ activeSection, setActiveSection, isLoggedIn, onLogin, o
     { id: 'contact', label: 'Contact Us' },
   ];
 
-  const userProfile = JSON.parse(localStorage.getItem('userProfile') || '{"name":"John Doe","email":"john.doe@example.com"}');
+  let userProfile = { name: 'John Doe', email: 'john.doe@example.com' } as { name: string; email: string };
+  try {
+    const raw = localStorage.getItem('userProfile');
+    if (raw) userProfile = JSON.parse(raw);
+  } catch (e) {
+    // ignore malformed localStorage value and keep default
+  }
   const getInitials = (name: string) => name.split(' ').map(n => n[0]).join('').toUpperCase();
 
   const handleLogoutClick = () => {
@@ -54,6 +61,8 @@ export function Navbar({ activeSection, setActiveSection, isLoggedIn, onLogin, o
   const handleLoginSuccess = (userData: any) => {
     onLogin(userData);
   };
+
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <>
@@ -173,6 +182,20 @@ export function Navbar({ activeSection, setActiveSection, isLoggedIn, onLogin, o
                   </Button>
                 </motion.div>
               )}
+              {/* Theme toggle button */}
+              <motion.button
+                onClick={toggleTheme}
+                className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
+                aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {theme === 'light' ? (
+                  <Moon className="w-5 h-5 text-gray-700" />
+                ) : (
+                  <Sun className="w-5 h-5 text-yellow-400" />
+                )}
+              </motion.button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -315,6 +338,20 @@ export function Navbar({ activeSection, setActiveSection, isLoggedIn, onLogin, o
                     visible: { opacity: 1, x: 0 },
                   }}
                 >
+                  {/* Mobile theme toggle */}
+                  <div className="px-3 py-2">
+                    <button
+                      onClick={() => {
+                        toggleTheme();
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className="flex items-center gap-2 w-full text-left px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
+                      aria-label="Toggle theme"
+                    >
+                      {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4 text-yellow-400" />}
+                      Toggle theme
+                    </button>
+                  </div>
                   {isLoggedIn ? (
                     <Button 
                       variant="outline" 
